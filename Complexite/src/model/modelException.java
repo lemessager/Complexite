@@ -2,7 +2,12 @@ package model;
 
 public class modelException extends Exception {
 	
-	public modelException(String s){
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    public modelException(String s){
 		System.err.println(s);
 	}
 }
