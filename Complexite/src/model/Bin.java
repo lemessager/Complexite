@@ -78,7 +78,7 @@ public class Bin {
 	 * @return
 	 */
 	boolean validRectangle(Rectangle rectangle) {
-		return rectangle.getSquare() <= this.getSquare();
+		return rectangle.getHeight()<=height && rectangle.getWidth()<=width;
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class Bin {
 			placeRectangle(r, i, j);
 		}
 		else
-			throw new modelException("\n nope \n impossible de placer le rectangle "+r+" dans le bin \n "+this);
+			throw new modelException("\n nope \n impossible de placer le rectangle "+r+" dans le bin \n "+toString());
 
 	}
 
