@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+
 import model.Bin;
 import model.Problem;
 import model.Rectangle;
 import model.Solution;
+import model.SolutionAlgo1;
 import model.modelException;
 
 public class Main {
@@ -20,7 +22,7 @@ public class Main {
         list.add(r4);
         
         Problem p = new Problem(list, heightBin, widthBin);
-        Solution s = new Solution(p);
+        Solution s = new SolutionAlgo1(p);
         s.getSolution();
 
         for (Rectangle rectangle : list) {

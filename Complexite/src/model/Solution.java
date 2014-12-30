@@ -3,12 +3,20 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Solution {
+/**
+ * 
+ * 
+ * Classe generique modelisant la solution d'un probleme donne
+ * 
+ * @author  YZ
+ *
+ */
+public abstract class Solution {
 
-    private ArrayList<Bin> binList;
-    private int binHeight;
-    private int binWidth;
-    private ArrayList<Rectangle> rectangles;
+    protected ArrayList<Bin> binList;
+    protected int binHeight;
+    protected int binWidth;
+    protected ArrayList<Rectangle> rectangles;
 
     public Solution(Problem p) {
         rectangles = p.getListOfRectangles();
@@ -17,27 +25,8 @@ public class Solution {
         binList = new ArrayList<>();
     }
 
-    public void getSolution() throws modelException {
-        // if (rectangles.size() > 0) {
-        Collections.sort(rectangles, new Sort());
-        Bin b1 = new Bin(binHeight, binWidth);
-        binList.add(b1);
-
-        for (Rectangle rectangle : rectangles) {
-            for (Bin bin : binList) {
-                if (bin.validRectangle(rectangle)) {
-                    bin.placeRec(rectangle);
-                    break;
-                } else {
-                    b1 = new Bin(binHeight, binWidth);
-                    binList.add(b1);
-                    b1.placeRec(rectangle);
-                }
-            }
-            
-        }
-        // }
-    }
+  
+    public abstract void getSolution() throws modelException;
 
     public ArrayList<Bin> getBinList() {
         return binList;
