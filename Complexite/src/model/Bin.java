@@ -115,7 +115,8 @@ public class Bin {
 					} else
 						// case non vide
 						throw new modelException(
-								"\n Impossible de placer un rectangle ("
+
+								 		"\n Impossible de placer un rectangle ("
 										+ r.getHeight() + "," + r.getWidth()
 										+ ")"
 										+ "a cet endroit, case non vide \n");
