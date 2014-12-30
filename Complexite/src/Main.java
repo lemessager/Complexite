@@ -26,10 +26,10 @@ public class Main {
         for (Rectangle rectangle : list) {
             System.out.println(rectangle.toString());
         }
-        /*
+        
         Bin b = new Bin(4, 4);
-        b.placeRectangle(r2, 1, 1);
-        b.placeRectangle(r, 0, 0);
-        System.out.println(b);*/
+        b.placeRec(r2);
+        b.placeRec(r);
+        System.out.println(b);
     }
 }

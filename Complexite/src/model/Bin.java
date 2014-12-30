@@ -10,8 +10,9 @@ import java.util.HashMap;
  *         rectangles
  */
 public class Bin {
-    private int height, width;
+    private int height, width, square;
     private Rectangle[][] grid;
+    private int[][] bin;
     private HashMap<Rectangle, String> map = new HashMap<Rectangle, String>();
 
     /**
@@ -25,7 +26,16 @@ public class Bin {
     public Bin(int h, int w) {
         this.height = h;
         this.width = w;
+        this.setSquare(height * width);
         grid = new Rectangle[height][width];
+        bin = new int[height][width];
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                bin[i][j] = 0;
+                System.out.println("init bin[" + i + "][" + j + "] = "
+                        + bin[i][j]);
+            }
+        }
     }
 
     /**
@@ -52,6 +62,14 @@ public class Bin {
         this.width = width;
     }
 
+    public int getSquare() {
+        return square;
+    }
+
+    public void setSquare(int square) {
+        this.square = square;
+    }
+
     /**
      * Verifie si un rectangle peut s'inserer dans la boite
      * 
@@ -60,8 +78,7 @@ public class Bin {
      * @return
      */
     boolean validRectangle(Rectangle rectangle) {
-        return rectangle.getHeight() <= this.height
-                && rectangle.getWidth() <= this.getWidth();
+        return rectangle.getSquare() <= this.getSquare();
     }
 
     /**
@@ -78,7 +95,8 @@ public class Bin {
      *             envoit une exception si on ne peut pas placer de rectangle a
      *             cet endroit
      */
-    public void placeRectangle(Rectangle r, int h, int w) throws modelException {
+    private void placeRectangle(Rectangle r, int h, int w)
+            throws modelException {
 
         // on place l'objet rectangle r dans toutes les cases de la grille ou il
         // apparait
@@ -92,6 +110,7 @@ public class Bin {
                     // On verifie si la case est vide
                     if (emptyCase(i, j)) {
                         grid[ord][abs] = r;
+                        bin[ord][abs] = 1;
                         map.put(r, "r(" + ord + "," + abs + ")");
                     } else
                         // case non vide
@@ -107,6 +126,30 @@ public class Bin {
 
             }
         }
+    }
+
+    public void placeRec(Rectangle r) throws modelException {
+        int[] a = chercherPlace(r);
+        int i = a[0];
+        int j = a[1];
+        placeRectangle(r, i, j);
+
+    }
+
+    private int[] chercherPlace(Rectangle r) {
+        int[] a = null;
+        for (int i = 0; i < r.getHeight(); i++) {
+            for (int j = 0; j < r.getWidth(); j++) {
+                int b = emptyCase(i, j) ? 1 : 0;
+                System.out.println("i: " + i + "; j: " + j + " " + b);
+                /*
+                 * if (emptyCase(i, j)) { int ord = i + r.getHeight(), abs = j +
+                 * r.getWidth(); if (validCase(ord, abs)) { a[0] = i; a[1] = j;
+                 * break; } }
+                 */
+            }
+        }
+        return a;
     }
 
     /**
@@ -132,7 +175,9 @@ public class Bin {
      * @return
      */
     public boolean emptyCase(int h, int w) {
-        return grid[h][w] == null;
+        System.out.println("emptyCase: h:" + h + "; w:" + w);
+        System.out.println("bin: " + bin[h][w]);
+        return bin[h][w] == 0;
     }
 
     /**

@@ -8,7 +8,7 @@ package model;
  */
 public class Rectangle {
 
-    private int height, width;
+    private int height, width, square;
 
     /**
      * Cree un rectangle de hauteur i et de largeur j
@@ -21,6 +21,7 @@ public class Rectangle {
     public Rectangle(int i, int j) {
         this.height = i;
         this.width = j;
+        this.setSquare(i * j);
     }
 
     public int getHeight() {
@@ -39,9 +40,17 @@ public class Rectangle {
         this.width = width;
     }
 
+    public int getSquare() {
+        return square;
+    }
+
+    public void setSquare(int square) {
+        this.square = square;
+    }
+    
     public int compareTo(Rectangle rectangle) {
-        int square1 = this.height * this.width;
-        int square2 = rectangle.getHeight() * rectangle.getWidth();
+        int square1 = this.getSquare();
+        int square2 = rectangle.getSquare();
         if (square1 < square2) {
             return 1;
         } else if (square1 == square2) {
@@ -54,4 +63,6 @@ public class Rectangle {
     public String toString() {
         return "Rectangle : Height " + this.height + " Width " + this.width;
     }
+
+    
 }

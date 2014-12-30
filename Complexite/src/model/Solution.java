@@ -14,18 +14,29 @@ public class Solution {
         rectangles = p.getListOfRectangles();
         binHeight = p.getHeight();
         binWidth = p.getWidth();
+        binList = new ArrayList<>();
     }
 
     public void getSolution() throws modelException {
+        // if (rectangles.size() > 0) {
         Collections.sort(rectangles, new Sort());
         Bin b1 = new Bin(binHeight, binWidth);
-        /*for (Rectangle rec : rectangles) {
-            if (b1.validRectangle(rec)) {
-                b1.placeRectangle(rec, 0, 0);
-            } else {
-                b1 = new Bin(binHeight, binHeight);
+        binList.add(b1);
+
+        for (Rectangle rectangle : rectangles) {
+            for (Bin bin : binList) {
+                if (bin.validRectangle(rectangle)) {
+                    bin.placeRec(rectangle);
+                    break;
+                } else {
+                    b1 = new Bin(binHeight, binWidth);
+                    binList.add(b1);
+                    b1.placeRec(rectangle);
+                }
             }
-        }*/
+            
+        }
+        // }
     }
 
     public ArrayList<Bin> getBinList() {
