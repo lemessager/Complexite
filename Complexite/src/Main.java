@@ -21,6 +21,6 @@ public class Main {
         s.getSolution();
 
         TextualDisplay.displaySolution(s);
-    
+        
     }
 }

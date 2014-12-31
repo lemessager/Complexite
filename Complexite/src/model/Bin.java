@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Bin {
 	private int height, width, square;
 	private Rectangle[][] grid;
-	private int[][] bin;
+	
 	private HashMap<Rectangle, String> map = new HashMap<Rectangle, String>();
 
 	/**
@@ -29,14 +29,14 @@ public class Bin {
 		this.width = w;
 		this.setSquare(height * width);
 		grid = new Rectangle[height][width];
-		bin = new int[height][width];
+		/*
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				bin[i][j] = 0;
-				System.out.println("init bin[" + i + "][" + j + "] = "
-						+ bin[i][j]);
-			}
-		}
+				*/
+			
+			
+		
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class Bin {
 	 * @return
 	 */
 	boolean validRectangle(Rectangle rectangle) {
-		return rectangle.getHeight()<=height && rectangle.getWidth()<=width;
+		return rectangle.getHeight() <= height && rectangle.getWidth() <= width;
 	}
 
 	/**
@@ -96,8 +96,8 @@ public class Bin {
 	 *             envoit une exception si on ne peut pas placer de rectangle a
 	 *             cet endroit
 	 */
-	private void placeRectangle(Rectangle r, int h, int w)
-			throws modelException {
+	private boolean placeRectangle(Rectangle r, int h, int w) throws modelException
+			 {
 
 		// on place l'objet rectangle r dans toutes les cases de la grille ou il
 		// apparait
@@ -109,49 +109,50 @@ public class Bin {
 				if (validCase(ord, abs)) {
 
 					// On verifie si la case est vide
-					if (emptyCase(i, j)) {
+					if (emptyCase(ord,abs)) {
 						grid[ord][abs] = r;
-						bin[ord][abs] = 1;
+						
 						map.put(r, "r(" + ord + "," + abs + ")");
-					} else
-						// case non vide
-						throw new modelException(
-
-								 		"\n Impossible de placer un rectangle ("
-										+ r.getHeight() + "," + r.getWidth()
-										+ ")"
-										+ "a cet endroit, case non vide \n");
+					} else {
+						throw new modelException("erreur placement rectangle \n");
+						
+						
+					}
 				} else
-					// debordement de la grille
-					throw new modelException(
-							"\n Vous essayez de placer un rectangle a l'exterieur de la boite \n");
-
+					throw new modelException("erreur placement rectangle \n");
+						
 			}
 		}
+		return true;
 	}
 
 	/**
 	 * 
-	 * Place le rectangle r dans la grille
+	 * Place le rectangle r dans la grille renvoit true si c'est possible, false
+	 * sinon
 	 * 
 	 * @param r
-	 * @throws modelException s'il est impossible de placer le rectangle, la methode renvoit une exception
+	 * @throws modelException
+	 *             s'il est impossible de placer le rectangle, la methode
+	 *             renvoit une exception
 	 */
-	public void placeRec(Rectangle r) throws modelException {
+	public boolean placeRec(Rectangle r) throws modelException {
 		int[] a = chercherPlace(r);
 		if (a != null) {
 			int i = a[0];
 			int j = a[1];
 			placeRectangle(r, i, j);
+			return true;
 		}
-		else
-			throw new modelException("\n nope \n impossible de placer le rectangle "+r+" dans le bin \n "+toString());
+
+		return false;
 
 	}
 
 	/**
 	 * 
-	 * Cherche et renvoit les coordonnees dans la boite, d'un endroit ou placer le rectangle r
+	 * Cherche et renvoit les coordonnees dans la boite, d'un endroit ou placer
+	 * le rectangle r
 	 * 
 	 * @param r
 	 * @return
@@ -160,14 +161,13 @@ public class Bin {
 		int[] a = null;
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				int b = validPlace(i, j, r) ? 1 : 0;
-				System.out.println("i: " + i + "; j: " + j + " " + b);
-				return a;
-				/*
-				 * if (emptyCase(i, j)) { int ord = i + r.getHeight(), abs = j +
-				 * r.getWidth(); if (validCase(ord, abs)) { a[0] = i; a[1] = j;
-				 * break; } }
-				 */
+				if (validPlace(i, j, r)){
+					a = new int[2];
+					a[0]=i;a[1]=j;
+					return a;	
+				}
+				
+				
 			}
 		}
 		return a;
@@ -175,15 +175,20 @@ public class Bin {
 
 	/**
 	 * Verifie si on peut placer le rectangle r a la position i j
-	 * @param i abscisse 
-	 * @param j ordonnee
-	 * @param r rectangle
+	 * 
+	 * @param i
+	 *            abscisse
+	 * @param j
+	 *            ordonnee
+	 * @param r
+	 *            rectangle
 	 * @return
 	 */
 	private boolean validPlace(int i, int j, Rectangle r) {
-		for (; i < r.getHeight(); i++) {
-			for (; j < r.getWidth(); j++) {
-				if (!validCase(i, j) || emptyCase(i, j))
+		
+		for (int k=i; k < r.getHeight()+i; k++) {
+			for (int l =j; l < r.getWidth()+j; l++) {
+				if (!(validCase(k,l) && emptyCase(k,l)))
 					return false;
 			}
 		}
@@ -214,11 +219,11 @@ public class Bin {
 	 */
 	public boolean emptyCase(int h, int w) {
 		/*
-		 
-		 System.out.println("emptyCase: h:" + h + "; w:" + w);
-		System.out.println("bin: " + bin[h][w]);
-		return bin[h][w] == 0;*/
-		
+		 * 
+		 * System.out.println("emptyCase: h:" + h + "; w:" + w);
+		 * System.out.println("bin: " + bin[h][w]); return bin[h][w] == 0;
+		 */
+
 		return grid[h][w] == null;
 	}
 
@@ -245,13 +250,6 @@ public class Bin {
 			retour += "\n";
 		}
 		return retour;
-	}
-	
-	
-
-	public boolean canFit(Rectangle rectangle) {
-		
-		return false;
 	}
 
 }

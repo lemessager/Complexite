@@ -16,14 +16,18 @@ public class SolutionAlgo1 extends Solution{
 	        binList.add(b1);
 
 	        for (Rectangle rectangle : rectangles) {
-	            for (Bin bin : binList) {
-	                if (bin.validRectangle(rectangle) && bin.canFit(rectangle)) {
-	                    bin.placeRec(rectangle);
-	                    break;
-	                } else {
+	        	System.out.println(rectangle);
+	            for (int i=0;i<binList.size();i++) {
+	            	System.out.println(i);
+	            	Bin bin = binList.get(i);
+	                if (bin.validRectangle(rectangle) && bin.placeRec(rectangle)) {
+	                   break;  
+	                }
+	                 else {
 	                    b1 = new Bin(binHeight, binWidth);
 	                    binList.add(b1);
 	                    b1.placeRec(rectangle);
+	                    
 	                }
 	            }
 	            
