@@ -16,7 +16,7 @@ public class SolutionAlgo1 extends Solution {
 		binList.add(b1);
 		boolean ok = false;
 		for (Rectangle rectangle : rectangles) {
-			System.out.println(rectangle);
+		
 			for (int i = 0; i < binList.size(); i++) {
 
 				Bin bin = binList.get(i);
@@ -33,7 +33,7 @@ public class SolutionAlgo1 extends Solution {
 				b1 = new Bin(binHeight, binWidth);
 				binList.add(b1);
 				b1.placeRec(rectangle);
-				System.out.println("done");
+
 				ok = true;
 			}
 
