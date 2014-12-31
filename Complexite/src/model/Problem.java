@@ -22,16 +22,26 @@ public class Problem {
      */
     public Problem(ArrayList<Rectangle> list, int height, int width)
             throws modelException {
-        Bin b = new Bin(height, width);
-        for (Rectangle r : list) {
-            if (!b.validRectangle(r))
-                throw new modelException(
-                        "Probleme non instantiable : un des rectangles a une dimension invalide");
-        }
+        this.height=height;
+        this.width=width;
         listOfRectangles = list;
+        checkProblem();
     }
 
-    /**
+    public void checkProblem () throws modelException{
+    	   for (Rectangle r : listOfRectangles) {
+    		   Bin b = new Bin(height, width);
+               if (!b.validRectangle(r))
+                   throw new modelException(
+                           "\n Probleme non instantiable : un des rectangles a une dimension invalide \n");
+           }
+    }
+    
+    public Problem() {
+		
+	}
+
+	/**
      * Ajoute un rectangle au probleme
      * 
      * @param r

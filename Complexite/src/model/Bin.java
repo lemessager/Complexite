@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -212,9 +213,13 @@ public class Bin {
 	 * @return
 	 */
 	public boolean emptyCase(int h, int w) {
-		System.out.println("emptyCase: h:" + h + "; w:" + w);
+		/*
+		 
+		 System.out.println("emptyCase: h:" + h + "; w:" + w);
 		System.out.println("bin: " + bin[h][w]);
-		return bin[h][w] == 0;
+		return bin[h][w] == 0;*/
+		
+		return grid[h][w] == null;
 	}
 
 	/**
@@ -240,6 +245,13 @@ public class Bin {
 			retour += "\n";
 		}
 		return retour;
+	}
+	
+	
+
+	public boolean canFit(Rectangle rectangle) {
+		
+		return false;
 	}
 
 }

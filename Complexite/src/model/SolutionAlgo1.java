@@ -17,7 +17,7 @@ public class SolutionAlgo1 extends Solution{
 
 	        for (Rectangle rectangle : rectangles) {
 	            for (Bin bin : binList) {
-	                if (bin.validRectangle(rectangle)) {
+	                if (bin.validRectangle(rectangle) && bin.canFit(rectangle)) {
 	                    bin.placeRec(rectangle);
 	                    break;
 	                } else {
