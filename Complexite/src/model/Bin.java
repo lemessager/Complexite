@@ -245,7 +245,7 @@ public class Bin {
 		String retour = "";
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				retour += "[	R" + list.indexOf(grid[i][j]) + "	]";
+				retour += "[	" + (list.indexOf(grid[i][j])+1) + "	]";
 			}
 			retour += "\n";
 		}

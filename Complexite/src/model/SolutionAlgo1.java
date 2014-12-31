@@ -2,37 +2,43 @@ package model;
 
 import java.util.Collections;
 
-public class SolutionAlgo1 extends Solution{
+public class SolutionAlgo1 extends Solution {
 
-	  public SolutionAlgo1(Problem p) {
+	public SolutionAlgo1(Problem p) {
 		super(p);
-		
+
 	}
 
 	public void getSolution() throws modelException {
-	        
-	        Collections.sort(rectangles, new Sort());
-	        Bin b1 = new Bin(binHeight, binWidth);
-	        binList.add(b1);
 
-	        for (Rectangle rectangle : rectangles) {
-	        	System.out.println(rectangle);
-	            for (int i=0;i<binList.size();i++) {
-	            	System.out.println(i);
-	            	Bin bin = binList.get(i);
-	                if (bin.validRectangle(rectangle) && bin.placeRec(rectangle)) {
-	                   break;  
-	                }
-	                 else {
-	                    b1 = new Bin(binHeight, binWidth);
-	                    binList.add(b1);
-	                    b1.placeRec(rectangle);
-	                    
-	                }
-	            }
-	            
-	        }
-	        
-	    }
-	  
+		Collections.sort(rectangles, new Sort());
+		Bin b1 = new Bin(binHeight, binWidth);
+		binList.add(b1);
+		boolean ok = false;
+		for (Rectangle rectangle : rectangles) {
+			System.out.println(rectangle);
+			for (int i = 0; i < binList.size(); i++) {
+				System.out.println(i);
+				Bin bin = binList.get(i);
+				ok = false;
+				if (bin.validRectangle(rectangle) && bin.placeRec(rectangle)) {
+					System.out.println("euu");
+					ok = true;
+					break;
+				}
+
+			}
+			if (!ok) {
+				
+				b1 = new Bin(binHeight, binWidth);
+				binList.add(b1);
+				b1.placeRec(rectangle);
+				System.out.println("done");
+				ok = true;
+			}
+
+		}
+
+	}
+
 }
