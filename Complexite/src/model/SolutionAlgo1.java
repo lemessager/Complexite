@@ -10,7 +10,7 @@ public class SolutionAlgo1 extends Solution{
 	}
 
 	public void getSolution() throws modelException {
-	        // if (rectangles.size() > 0) {
+	        
 	        Collections.sort(rectangles, new Sort());
 	        Bin b1 = new Bin(binHeight, binWidth);
 	        binList.add(b1);
@@ -32,7 +32,7 @@ public class SolutionAlgo1 extends Solution{
 	            }
 	            
 	        }
-	        // }
+	        
 	    }
 	  
 }

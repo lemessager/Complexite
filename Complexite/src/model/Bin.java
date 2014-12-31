@@ -14,7 +14,7 @@ public class Bin {
 	private int height, width, square;
 	private Rectangle[][] grid;
 	
-	private HashMap<Rectangle, String> map = new HashMap<Rectangle, String>();
+	private ArrayList<Rectangle> list = new ArrayList<Rectangle>();
 
 	/**
 	 * cree une boite
@@ -112,7 +112,7 @@ public class Bin {
 					if (emptyCase(ord,abs)) {
 						grid[ord][abs] = r;
 						
-						map.put(r, "r(" + ord + "," + abs + ")");
+						list.add(r);
 					} else {
 						throw new modelException("erreur placement rectangle \n");
 						
@@ -201,7 +201,7 @@ public class Bin {
 	 * @param r
 	 */
 	public void removeRectangle(Rectangle r) {
-		map.remove(r);
+		list.remove(r);
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (grid[i][j] == r)
@@ -245,7 +245,7 @@ public class Bin {
 		String retour = "";
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				retour += "[	" + map.get(grid[i][j]) + "	]";
+				retour += "[	R" + list.indexOf(grid[i][j]) + "	]";
 			}
 			retour += "\n";
 		}
