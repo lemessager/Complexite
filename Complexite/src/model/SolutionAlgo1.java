@@ -18,11 +18,11 @@ public class SolutionAlgo1 extends Solution {
 		for (Rectangle rectangle : rectangles) {
 			System.out.println(rectangle);
 			for (int i = 0; i < binList.size(); i++) {
-				System.out.println(i);
+
 				Bin bin = binList.get(i);
 				ok = false;
 				if (bin.validRectangle(rectangle) && bin.placeRec(rectangle)) {
-					System.out.println("euu");
+
 					ok = true;
 					break;
 				}
