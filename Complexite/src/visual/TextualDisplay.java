@@ -21,9 +21,9 @@ public class TextualDisplay {
 	}
 
 	public static void displaySolution(Solution s) {
-		System.out.println("\n------------Solution--------------");	
+		System.out.println("\n------------Solution--------------\n");	
 		for (Bin b:s.getBinList()){
-			System.out.println("|"+b);
+			System.out.println(b);
 		}
 		System.out.println("----------------------------------\n");
 	}

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import reder.TextReader;
+import visual.GraphicalDisplay;
 import visual.TextualDisplay;
 import model.Bin;
 import model.Problem;
@@ -16,11 +17,11 @@ public class Main {
     	
     	Problem p= TextReader.createProblem("exemples/exempleDeBase");
     	TextualDisplay.displayProblem(p);
-
+    	
     	Solution s = new SolutionAlgo1(p);
         s.getSolution();
 
         TextualDisplay.displaySolution(s);
-        
+        GraphicalDisplay.displayProblemAndSolution(p,s);
     }
 }

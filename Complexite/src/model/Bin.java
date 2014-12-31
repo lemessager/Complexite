@@ -16,6 +16,10 @@ public class Bin {
 	
 	private ArrayList<Rectangle> list = new ArrayList<Rectangle>();
 
+	public Rectangle[][] getGrid(){
+		return grid;
+	}
+	
 	/**
 	 * cree une boite
 	 * 
